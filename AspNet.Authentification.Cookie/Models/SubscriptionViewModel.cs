@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,5 +22,15 @@ namespace AspNet.Authentification.Cookie.Models
         [Display(Name = "Mot de passe")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Display(Name = "Age")]
+        public int Age { get; set; }
+
+        [Display(Name = "Votre Rôle")]
+        public string RoleSelected { get; set; }
+
+        public List<SelectListItem> Roles { get; } = Role.Roles
+            .Select(role => new SelectListItem { Value = role, Text = role })
+            .ToList();
     }
 }

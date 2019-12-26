@@ -28,15 +28,20 @@
         <input asp-for="Password" />
     </div>
 
-    @*<div>
+    <div>
+        <label asp-for="Age"></label>
+        <input asp-for="Age" />
+    </div>
+
+    <div>
         <label asp-for="RoleSelected"></label>
         <select asp-for="RoleSelected" asp-items="Model.Roles"></select>
     </div>
 
-    <div>
-        <label asp-for="Age"></label>
-        <input asp-for="Age" />
-    </div>*@
+    @*<div>
+            <label asp-for="Age"></label>
+            <input asp-for="Age" />
+        </div>*@
 
     <button type="submit">Inscription</button>
 </form>    
