@@ -18,7 +18,6 @@ namespace AspNet.Authentification.Cookie.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin, Salarié")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
