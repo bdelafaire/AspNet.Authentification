@@ -18,13 +18,17 @@ namespace AspNet.Authentification.Client
                 return;
             }
 
-            var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
+            var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
                 Address = disco.TokenEndpoint,
+
                 ClientId = "client",
                 ClientSecret = "secret",
 
-                Scope = "api1"
+                UserName = "test",
+                Password = "P2ssw0rd!",
+                
+                Scope = "api1 offline_access"
             });
             if (tokenResponse.IsError)
             {
@@ -44,6 +48,23 @@ namespace AspNet.Authentification.Client
                 var content = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(JArray.Parse(content));
             }
+
+            tokenResponse = await client.RequestRefreshTokenAsync(new RefreshTokenRequest
+            {
+                Address = disco.TokenEndpoint,
+
+                ClientId = "client",
+                ClientSecret = "secret",
+
+                RefreshToken = tokenResponse.RefreshToken
+            });
+
+            if (tokenResponse.IsError) 
+            {
+                Console.WriteLine(tokenResponse.Error);
+                return;
+            }
+            Console.WriteLine(tokenResponse.Json);
         }
     }
 }
